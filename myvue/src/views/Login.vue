@@ -6,9 +6,9 @@
                 用户名：<input type="text" name="username" ref="userid"/></br>
                 密　码：<input type="password" name="userpassword" ref="userpassword"/>
             </form>
-            <form>
-                <input type="radio" name="usertype" value="Administrator" v-model="looplist"/>管理员
-                <input type="radio" name="usertype" value="merchant" v-model="looplist"/>商家
+            <form class="chooise">
+                <div><input type="radio" name="usertype" value="Administrator" v-model="looplist"/>管理员</div>
+                <div><input type="radio" name="usertype" value="merchant" v-model="looplist"/>商家</div>
             </form>
             <button @click="userlogin">登录</button>
         </div>
@@ -65,5 +65,17 @@ div{
 .login_main{
     padding: 30px;
     color: rgb(30, 100, 152);
+}
+.login_main input{
+    border-radius: 0.2rem;
+    border-width: 1px;
+    border-style:solid;
+    border-color: rgb(171, 171, 171);
+}
+.chooise{
+    display: flex;
+}
+.chooise div{
+    flex:1;
 }
 </style>
