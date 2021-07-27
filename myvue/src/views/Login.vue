@@ -56,8 +56,8 @@ export default {
                             alert(response.data.message)
                         }else{
                             this.$router.push({
-                                name:'Personal center',
-                                params:{
+                                path:'/Personal_center',
+                                query:{
                                     userid:this.$refs.userid.value,
                                     userpassword:this.$refs.userpassword.value
                                 }

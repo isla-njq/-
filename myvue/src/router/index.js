@@ -12,12 +12,11 @@ export default new VueRouter({
         path:"/",
         component:Login
       },{
+        path:'/Personal_center',
+        component:Personal_center
+      },{
         path:"*",
         redirect:'/'
-      },{
-        path:'/Personal_center',
-        name:'Personal center',
-        component:Personal_center
       }
     ]
   });
