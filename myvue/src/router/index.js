@@ -16,7 +16,7 @@ export default new VueRouter({
         redirect:'/'
       },{
         path:'/Personal_center',
-        name:'Personal center'
+        name:'Personal center',
         component:Personal_center
       }
     ]
