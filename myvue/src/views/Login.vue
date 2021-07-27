@@ -1,16 +1,18 @@
 <template>
     <div class="main">
-        <div><h1>账户登录</h1></div>
-        <div class="login_main">
-            <form>
-                用户名：<input type="text" name="username" ref="userid"/></br>
-                密　码：<input type="password" name="userpassword" ref="userpassword"/>
-            </form>
-            <form class="chooise">
-                <div><input type="radio" name="usertype" value="Administrator" v-model="looplist"/>管理员</div>
-                <div><input type="radio" name="usertype" value="merchant" v-model="looplist"/>商家</div>
-            </form>
-            <button @click="userlogin">登录</button>
+        <div class="main_body">
+            <div><h1>账户登录</h1></div>
+            <div class="login_main">
+                <form class="choose">
+                    <div>用户名：<input type="text" name="username" ref="userid"/></div><br/>
+                    <div>密　码：<input type="password" name="userpassword" ref="userpassword"/></div>
+                </form>
+                <form>
+                    <div id="adm"><input type="radio" name="usertype" value="Administrator" v-model="looplist"/>管理员</div>
+                    <div id="mer"><input type="radio" name="usertype" value="merchant" v-model="looplist"/>商家</div>
+                </form>
+                <button @click="userlogin">登录</button>
+            </div>
         </div>
     </div>
 </template>
@@ -29,30 +31,41 @@ export default {
     },
     methods:{
             userlogin(){
+                if(this.looplist.length==0){
+                    alert("请选择你的身份");
+                    return;
+                }
                 if(this.$refs.userid.value.length == 0){
                     alert("请输入账号")
                 }else if(this.$refs.userpassword.value.length==0||this.$refs.userid.value.length == 0){
                     alert("账号或密码错误")
+                }else{
+                    let data = {
+                        username: this.$refs.userid.value,
+                        password: this.$refs.userpassword.value,
+                    };                
+                    axios({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        method: 'post',
+                        url: 'http://localhost:8080/admin/login_admin',
+                        data: Qs.stringify(data)
+                    }).then(function (response) {
+                        if(response.data.status == false){
+                            alert(response.data.message)
+                        }else{
+                            this.$router.push({
+                                name:'Personal center',
+                                params:{
+                                    userid:this.$refs.userid.value,
+                                    userpassword:this.$refs.userpassword.value
+                                }
+                            })
+                        }
+                        console.log(1111,response.data);
+                    });
                 };
-                console.log(this.looplist,this.$refs.userid.value.length,this.$refs.userpassword.value.length);
-                let data = {
-                    username: this.$refs.userid.value,
-                    password: this.$refs.userpassword.value,
-                };                
-                axios({
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    method: 'post',
-                    url: 'http://localhost:8080/admin/login_admin',
-                    data: Qs.stringify(data)
-                }).then(function (response) {
-                    if(response.data.status == false){
-                        alert(response.data.message)
-                    }
-                    console.log(1111,response.data);
-                });
-
             }
         }
 }
@@ -62,7 +75,20 @@ export default {
 div{
     background-color: rgb(217, 232, 251);
 }
+.main{
+    position: fixed;
+    top: 20%;
+    right: 20%;
+    width: 500px;
+    height: 400px;
+}
+.main_body{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
 .login_main{
+    width: 42%;
     padding: 30px;
     color: rgb(30, 100, 152);
 }
@@ -72,10 +98,34 @@ div{
     border-style:solid;
     border-color: rgb(171, 171, 171);
 }
-.chooise{
-    display: flex;
+.login_main form{
+    width: 250px;
 }
-.chooise div{
-    flex:1;
+.choose div input{
+    width: 70%;
+}
+.choose div{
+    margin-bottom: 15px;
+}
+form{
+    overflow: hidden;
+}
+#adm{
+    width: 48%;
+    float: left;
+    border-right: solid black 1px;
+}
+#mer{
+    width: 48%;
+    float: right;
+}
+button{
+    margin: 10%;
+    width: 100%;
+    height: 30px;
+    background-color: rgb(0, 108, 175);
+    color: white;
+    border-radius: 0.3rem;
+    border-width: 0px;
 }
 </style>
