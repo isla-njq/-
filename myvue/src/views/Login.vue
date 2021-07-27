@@ -58,8 +58,7 @@ export default {
                             this.$router.push({
                                 path:'/Personal_center',
                                 query:{
-                                    userid:this.$refs.userid.value,
-                                    userpassword:this.$refs.userpassword.value
+                                    userId:this.$refs.userid.value,
                                 }
                             })
                         }

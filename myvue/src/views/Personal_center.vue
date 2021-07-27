@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        {{$route.query.userId}}
     </div>
 </template>
 
@@ -15,7 +15,6 @@ export default {
     mounted(){
         let data = {
             username: $route.query.userId,
-            password: this.$route.query.userpassword,
         };           
         axios({
             headers: {
@@ -27,14 +26,6 @@ export default {
         }).then(function (response) {
             if(response.data.status == false){
                 alert(response.data.message)
-            }else{
-                this.$router.push({
-                    name:'Personal_center',
-                    params:{
-                        userid:this.$refs.userid.value,
-                        userpassword:this.$refs.userpassword.value
-                    }
-                })
             }
             console.log(1111,response.data);
         });
