@@ -9,14 +9,14 @@ Vue.use(VueRouter)
 export default new VueRouter({
     mode: 'history',
     routes: [{
-        path:"/",
-        component:Login
-      },{
-        path:'/Personal_center',
-        component:Personal_center
-      },{
-        path:"*",
-        redirect:'/'
-      }
+        path: "/",
+        component: Login
+    }, {
+        path: '/Personal_center',
+        component: Personal_center
+    }, {
+        path: "*",
+        redirect: '/'
+    }
     ]
-  });
+});
