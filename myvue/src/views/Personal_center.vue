@@ -1,17 +1,20 @@
 <template>
   <div>
-    {{ $route.query.userId }}
+    {{ $store.state.user }}
+    <div><br/>-------------------<br/></div>
+    {{ $store.state.password }}
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import Qs from 'qs'
 export default {
   data() {},
   mounted() {
     let data = {
-      username: $route.query.userId,
+      username: this.$store.state.user,
+      userpassword: this.$store.state.password
     };
     axios({
       headers: {

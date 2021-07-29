@@ -5,14 +5,17 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    user: undefined
+    user: undefined,
+    password: undefined
   },
   mutations: {
     login (state, payload) {
-      state.user = payload
+      state.user = payload.username,
+      state.password = payload.userpassword
     },
     logout (state) {
-      state.user = undefined
+      state.user = undefined,
+      state.password = undefined
     }
   },
   actions: {

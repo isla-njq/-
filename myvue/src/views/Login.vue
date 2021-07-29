@@ -52,21 +52,22 @@ export default {
   },
   methods: {
     userlogin() {
-      if (this.looplist.length == 0) {
+      let _this = this
+      if (_this.looplist.length == 0) {
         alert('请选择你的身份')
         return
       }
-      if (this.$refs.userid.value.length == 0) {
+      if (_this.$refs.userid.value.length == 0) {
         alert('请输入账号')
       } else if (
-        this.$refs.userpassword.value.length == 0 ||
-        this.$refs.userid.value.length == 0
+        _this.$refs.userpassword.value.length == 0 ||
+        _this.$refs.userid.value.length == 0
       ) {
         alert('账号或密码错误')
       } else {
         let data = {
-          username: this.$refs.userid.value,
-          password: this.$refs.userpassword.value,
+          username: _this.$refs.userid.value,
+          password: _this.$refs.userpassword.value,
         }
         axios({
           headers: {
@@ -79,9 +80,9 @@ export default {
           if (response.data.status == false) {
             alert(response.data.message)
           } else {
-            this.$store.commit(state,this.$refs.userid.value.length),
-            alert(this.$store.state.user)
-            router.push({
+            _this.$store.commit('login',{username:_this.$refs.userid.value,userpassword:_this.$refs.userpassword.value}),
+            alert(_this.$store.state.user),
+            _this.$router.push({
               path: '/Personal_center',
             })
           }
