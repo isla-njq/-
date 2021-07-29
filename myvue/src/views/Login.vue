@@ -79,11 +79,10 @@ export default {
           if (response.data.status == false) {
             alert(response.data.message)
           } else {
+            this.$store.commit(state,this.$refs.userid.value.length),
+            alert(this.$store.state.user)
             router.push({
               path: '/Personal_center',
-              query: {
-                userId: this.$refs.userid.value,
-              },
             })
           }
           console.log(1111, response.data)
