@@ -12,4 +12,14 @@ export default {
 </script>
 
 <style>
+*{
+  padding: 0;
+  margin: 0;
+}
+html{
+  height: 100%;
+}
+li{
+  list-style: none;
+}
 </style>
