@@ -14,9 +14,9 @@
                       </template>
                       <el-menu-item-group>
                         <el-menu-item index="/WaitPut">待上架</el-menu-item>
-                        <el-menu-item index="/Background">已发布</el-menu-item>
-                        <el-menu-item index="1-3">已下架</el-menu-item>
-                        <el-menu-item index="1-4">已售罄</el-menu-item>
+                        <el-menu-item index="/Issue">已发布</el-menu-item>
+                        <el-menu-item index="/Unshelve">已下架</el-menu-item>
+                        <el-menu-item index="/Sold">已售罄</el-menu-item>
                       </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="2">
