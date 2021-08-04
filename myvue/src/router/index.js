@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 import Login from '@/views/Login'
 import Personal_center from '@/views/Personal_center'
-import Commodity from '@/views/Shops/Commodity_management/Commodity_management'
+import Main from '@/views/Shops/Main'
 import WaitPut from '@/views/Shops/Commodity_management/Wait_putaway'
 import Issue from '@/views/Shops/Commodity_management/Issue'
 import Unshelve from '@/views/Shops/Commodity_management/UnShelve'
@@ -20,20 +20,23 @@ export default new VueRouter({
         path: '/Personal_center',
         component: Personal_center
     }, {
-        path:'/Commodity',
-        component: Commodity,
+        path:'/Main',
+        component: Main,
         children:[{
-            path:"/WaitPut",
+            path:"/Main/WaitPut",
             component:WaitPut
         },{
-            path:"/Issue",
+            path:"/Main/Issue",
             component:Issue
         },{
-            path:"/Unshelve",
+            path:"/Main/Unshelve",
             component:Unshelve
         },{
-            path:"/Sold",
+            path:"/Main/Sold",
             component:Sold
+        },{
+            path: "/",
+            redirect: '/Main/WaitPut'
         }]
     },{
         path: "*",

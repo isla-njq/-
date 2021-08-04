@@ -64,6 +64,7 @@ export default {
 <style scoped>
 main{
     overflow: hidden;
+    position: relative;
 }
 
 .el-breadcrumb-size{
@@ -76,7 +77,7 @@ main{
     overflow: hidden;
 }
 .section3{
-    position: fixed;
+    position: absolute;
     right: 100px;
     top: 155px;
 }

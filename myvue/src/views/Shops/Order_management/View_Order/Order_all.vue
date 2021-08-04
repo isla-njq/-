@@ -1,11 +1,11 @@
-<!--待上架-->
+<!--全部-->
 <template>
     <div class="main">
         <main>
             <section class="section2">
                 <el-breadcrumb separator-class="el-icon-arrow-right" class="el-breadcrumb-size">
-                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>待上架</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/' }">查看订单</el-breadcrumb-item>
+                    <el-breadcrumb-item>全部</el-breadcrumb-item>
                 </el-breadcrumb>
                 <div>
                     <table>
@@ -13,19 +13,20 @@
                             <th>商品名称</th>
                             <th>价格</th>
                             <th>库存</th>
+                            <th>销量</th>
                             <th>操作</th>
                         </tr>
                         <tr v-for="i in shopslist" :key="i.id">
                             <td>{{i.name}}</td>
                             <td>{{i.price}}</td>
                             <td>{{i.inventory}}</td>
-                            <td>编辑商品<br/>上架<br/>修改</td>
+                            <td>{{i.sales}}</td>
+                            <td>编辑商品<br/>上架<br/>删除</td>
                         </tr>
                     </table>
                 </div>
             </section>
         </main>
-        <section class="section3"><el-button type="primary">添加商品</el-button></section>
         <Foot class="foot"></Foot>
     </div>
 </template>
@@ -40,11 +41,13 @@ export default {
                     id:1,
                     name:'rog',
                     price:24000,
+                    sales:550,
                     inventory:286,
                 },{
                     id:2,
                     name:'rog',
                     price:24800,
+                    sales:0,
                     inventory:287,
                 }
             ]
@@ -60,7 +63,6 @@ export default {
 <style scoped>
 main{
     overflow: hidden;
-    position: relative;
 }
 
 .el-breadcrumb-size{
@@ -71,11 +73,6 @@ main{
     width: 90%;
     text-align: center;
     overflow: hidden;
-}
-.section3{
-    position: absolute;
-    right: 100px;
-    top: 155px;
 }
 table
 {
