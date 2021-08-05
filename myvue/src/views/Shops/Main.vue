@@ -29,6 +29,6 @@ export default {
 }
 .div2{
     float: left;
-    width: 70%;
+    width: 80%;
 }
 </style>

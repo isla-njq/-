@@ -1,27 +1,28 @@
-<!--全部-->
+<!--分类统计-->
 <template>
     <div class="main">
         <main>
+            <section>
+                选着需要查看的分类统计
+            </section>
             <section class="section2">
                 <el-breadcrumb separator-class="el-icon-arrow-right" class="el-breadcrumb-size">
-                    <el-breadcrumb-item :to="{ path: '/' }">查看订单</el-breadcrumb-item>
-                    <el-breadcrumb-item>全部</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/' }">数据统计</el-breadcrumb-item>
+                    <el-breadcrumb-item>分类统计</el-breadcrumb-item>
                 </el-breadcrumb>
                 <div>
                     <table>
                         <tr>
-                            <th>商品名称</th>
-                            <th>价格</th>
-                            <th>库存</th>
-                            <th>销量</th>
-                            <th>操作</th>
+                            <th>分类</th>
+                            <th>订单量</th>
+                            <th>销量量</th>
+                            <th>销售额</th>
                         </tr>
                         <tr v-for="i in shopslist" :key="i.id">
                             <td>{{i.name}}</td>
                             <td>{{i.price}}</td>
                             <td>{{i.inventory}}</td>
                             <td>{{i.sales}}</td>
-                            <td>编辑商品<br/>上架<br/>删除</td>
                         </tr>
                     </table>
                 </div>
@@ -39,16 +40,18 @@ export default {
             shopslist:[
                 {
                     id:1,
-                    name:'rog',
+                    name:'小熊杂货店',
+                    commodity:'可乐',
                     price:24000,
                     sales:550,
                     inventory:286,
                 },{
                     id:2,
-                    name:'rog',
-                    price:24800,
-                    sales:0,
-                    inventory:287,
+                    name:'小熊杂货店',
+                    commodity:'可乐',
+                    price:24000,
+                    sales:550,
+                    inventory:286,
                 }
             ]
         }
@@ -63,6 +66,7 @@ export default {
 <style scoped>
 main{
     overflow: hidden;
+    position: relative;
 }
 
 .el-breadcrumb-size{
@@ -73,6 +77,11 @@ main{
     width: 90%;
     text-align: center;
     overflow: hidden;
+}
+.section3{
+    position: absolute;
+    right: 100px;
+    top: 155px;
 }
 table
 {
