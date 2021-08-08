@@ -24,11 +24,23 @@ export default {
 .main{
     overflow: hidden;
 }
+
 .div1{
-    float: left;
+    position: absolute;
+    left: 0px;
+    top: 150px;
+    right: -17px;
+    bottom: 0px;
+    overflow-y:auto;
+    overflow-x: hidden;
+    background-color: #304156;
+    width: 219px;
+    padding-right: 20px;
 }
 .div2{
-    float: left;
-    width: 80%;
+    margin-left: 213px;
+    z-index: 1001;
+    max-height: 1030px;
+    overflow: hidden;
 }
 </style>

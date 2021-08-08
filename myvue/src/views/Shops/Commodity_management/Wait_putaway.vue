@@ -1,31 +1,32 @@
 <!--待上架-->
 <template>
-    <div class="main">
+    <div class="main" >
         <main>
             <section class="section2">
-                <el-breadcrumb separator-class="el-icon-arrow-right" class="el-breadcrumb-size">
-                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb separator-class="el-icon-arrow-right">
+                    <el-breadcrumb-item >商品管理</el-breadcrumb-item>
                     <el-breadcrumb-item>待上架</el-breadcrumb-item>
                 </el-breadcrumb>
-                <div>
-                    <table>
-                        <tr>
-                            <th>商品名称</th>
-                            <th>价格</th>
-                            <th>库存</th>
-                            <th>操作</th>
-                        </tr>
-                        <tr v-for="i in shopslist" :key="i.id">
-                            <td>{{i.name}}</td>
-                            <td>{{i.price}}</td>
-                            <td>{{i.inventory}}</td>
-                            <td>编辑商品<br/>上架<br/>修改</td>
-                        </tr>
-                    </table>
+                <section class="section3"><el-button type="primary">添加商品</el-button></section>
+                <div :style="'height:'+fullHeight+'px;'">
+                    <div class="tablecolor">
+                        <div class="tr">
+                                <div style="width: 40%">商品名称</div>
+                                <div style="width: 10%">价格</div>
+                                <div style="width: 10%">库存</div>
+                                <div style="width: 40%">操作</div>
+                            </div>
+                        <div v-for="i in shopslist" :key="i.id" class="tablemain">
+                            <span style="width: 40%">{{i.name}}</span>
+                            <span style="width: 10%">{{i.price}}</span>
+                            <span style="width: 10%">{{i.inventory}}</span>
+                            <span style="width: 40%">编辑商品<br/>上架<br/>修改</span>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
-        <section class="section3"><el-button type="primary">添加商品</el-button></section>
+        
         <Foot class="foot"></Foot>
     </div>
 </template>
@@ -47,13 +48,40 @@ export default {
                     price:24800,
                     inventory:287,
                 }
-            ]
+            ],
+            fullHeight: document.documentElement.clientHeight-195
         }
     },
     components:{
         Foot
     },
-
+    watch: {
+			fullHeight (val) {//监控浏览器高度变化
+				if(!this.timer) {
+					this.fullHeight = val
+					this.timer = true
+					let that = this
+					setTimeout(function (){
+						that.timer = false
+					},400)
+				}
+				
+			}
+		},
+	mounted () {
+		this.get_bodyHeight()
+	},
+	methods :{
+		get_bodyHeight () {//动态获取浏览器高度
+			const that = this
+			window.onresize = () => {
+				return (() => {
+					window.fullHeight = document.documentElement.clientHeight
+					that.fullHeight = window.fullHeight
+				})()
+			}
+		}
+	}
 }
 </script>
 
@@ -61,29 +89,56 @@ export default {
 main{
     overflow: hidden;
     position: relative;
+    background-color: rgb(244, 246, 250);
 }
 
-.el-breadcrumb-size{
+.el-breadcrumb{
+    background-color: white;
     font-size: 26px;
     line-height: 45px;
+    padding-left: 30px;
 }
 .section2{
-    width: 90%;
+    float: right;
+    width: 97%;
     text-align: center;
     overflow: hidden;
 }
 .section3{
+    margin: 5px;
     position: absolute;
     right: 100px;
-    top: 155px;
+    top: 0px;
+}
+.tablecolor{
+    height:100%;
+    width:100%;
+    background-color: white;
 }
 table
 {
 	width:100%;
 }
-th
-{
-	height:50px;
+.tr{
+    overflow: hidden;
+    width: 100%;
+}
+.tr div{
+    float: left;
+    background-color: rgb(244, 246, 250);
+    text-align: center;
+    padding-top: 59px;
+    padding-bottom: 10px;
+}
+.tablemain{
+    height: 100px;
+    background-color: white;
+    border-bottom: gray 1px solid;
+}
+.tablemain span{
+    display: block;
+    float: left;
+    padding-top:10px;
 }
 .foot{
     position:fixed;

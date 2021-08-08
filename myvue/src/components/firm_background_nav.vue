@@ -4,19 +4,22 @@
                 <el-col>
                   <el-menu
                     class="el-menu-vertical-demo"
-                    :unique-opened="true"
                     default-active="/Main/WaitPut"
+                    background-color="#304156"
+                    text-color="#fff"
+                    active-text-color="#ffd04b"
                     :router="true"
                     >
-                    <el-submenu index="1">
-                      <template slot="title">
-                        <span>商品管理</span>
-                      </template>
+                    <el-submenu index="1"
+                    background-color="#ffd04b"
+                    active-text-color="#304156"
+                    >
+                      <span slot="title">商品管理</span>
                       <el-menu-item-group>
-                        <el-menu-item index="/Main/WaitPut">待上架</el-menu-item>
-                        <el-menu-item index="/Main/Unshelve">已下架</el-menu-item>
-                        <el-menu-item index="/Main/Sold">已售罄</el-menu-item>
-                        <el-menu-item index="/Main/Issue">已发布</el-menu-item>
+                        <el-menu-item class="list" index="/Main/WaitPut">待上架</el-menu-item>
+                        <el-menu-item class="list" index="/Main/Unshelve">已下架</el-menu-item>
+                        <el-menu-item class="list" index="/Main/Sold">已售罄</el-menu-item>
+                        <el-menu-item class="list" index="/Main/Issue">已发布</el-menu-item>
                       </el-menu-item-group>
                     </el-submenu>
                     <el-submenu index="2">
@@ -27,7 +30,7 @@
                         <el-submenu index="2-1">
                           <template slot="title">全部</template>
                             <el-menu-item index="/Main/Orderall">查看订单</el-menu-item>
-                            <el-menu-item index="2-1-2">发货</el-menu-item>
+                            <el-menu-item >发货</el-menu-item>
                         </el-submenu>    
                         <el-menu-item index="/Main/Waitpay">待付款</el-menu-item>
                         <el-menu-item index="/Main/Waitship">待发货</el-menu-item>
@@ -77,6 +80,6 @@
 
 <style scoped>
 .tac{
-    width: 220px;
+  width: 220px;
 }
 </style>
