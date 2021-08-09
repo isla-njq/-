@@ -1,32 +1,35 @@
 <!--已售罄-->
 <template>
-    <div class="main">
+    <div class="main" >
         <main>
             <section class="section2">
-                <el-breadcrumb separator-class="el-icon-arrow-right" class="el-breadcrumb-size">
-                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb separator-class="el-icon-arrow-right">
+                    <el-breadcrumb-item>商品管理</el-breadcrumb-item>
                     <el-breadcrumb-item>已售罄</el-breadcrumb-item>
                 </el-breadcrumb>
-                <div>
-                    <table>
-                        <tr>
-                            <th>商品名称</th>
-                            <th>价格</th>
-                            <th>库存</th>
-                            <th>销量</th>
-                            <th>操作</th>
-                        </tr>
-                        <tr v-for="i in shopslist" :key="i.id">
-                            <td>{{i.name}}</td>
-                            <td>{{i.price}}</td>
-                            <td>{{i.inventory}}</td>
-                            <td>{{i.sales}}</td>
-                            <td>编辑商品<br/>下架</td>
-                        </tr>
-                    </table>
+                <div :style="'height:'+fullHeight+'px;'">
+                    <div class="tablecolor">
+                        <div class="tr">
+                                <div style="width: 40%">商品名称</div>
+                                <div style="width: 10%">价格</div>
+                                <div style="width: 10%">库存</div>
+                                <div style="width: 10%">销量</div>
+                                <div style="width: 10%">创建时间</div>
+                                <div style="width: 20%">操作</div>
+                            </div>
+                        <div v-for="i in shopslist" :key="i.id" class="tablemain">
+                            <span style="width: 40%" class="imggps"><img :src="i.imgurl">{{i.name}}</span>
+                            <span style="width: 10%">{{i.price}}</span>
+                            <span style="width: 10%">{{i.inventory}}</span>
+                            <span style="width: 10%">{{i.inventory}}</span>
+                            <span style="width: 10%">{{i.inventory}}</span>
+                            <div style="width: 20%"><section>编辑商品</section><section>上架</section><section>修改</section></div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
+        
         <Foot class="foot"></Foot>
     </div>
 </template>
@@ -39,48 +42,126 @@ export default {
             shopslist:[
                 {
                     id:1,
+                    imgurl:"../static/img/Header.png",
                     name:'rog',
                     price:24000,
-                    sales:550,
                     inventory:286,
                 },{
                     id:2,
                     name:'rog',
                     price:24800,
-                    sales:0,
                     inventory:287,
                 }
-            ]
+            ],
+            fullHeight: document.documentElement.clientHeight - 195
         }
     },
     components:{
         Foot
     },
-
+    watch: {
+			fullHeight (val) {//监控浏览器高度变化
+				if(!this.timer) {
+					this.fullHeight = val
+					this.timer = true
+					let that = this
+					setTimeout(function (){
+						that.timer = false
+					},400)
+				}
+				
+			}
+		},
+	mounted () {
+		this.get_bodyHeight()
+	},
+	methods :{
+		get_bodyHeight () {//动态获取浏览器高度
+			const that = this
+			window.onresize = () => {
+				return (() => {
+					window.fullHeight = document.documentElement.clientHeight
+					that.fullHeight = window.fullHeight - 195
+				})()
+			}
+		}
+	}
 }
 </script>
 
 <style scoped>
-main{
+.main{
     overflow: hidden;
+    position: relative;
+    background-color: rgb(244, 246, 250);
+    max-height: 1180px;
 }
 
-.el-breadcrumb-size{
+.el-breadcrumb{
+    background-color: white;
     font-size: 26px;
     line-height: 45px;
+    padding-left: 30px;
 }
 .section2{
-    width: 90%;
+    float: right;
+    width: 97%;
     text-align: center;
     overflow: hidden;
+}
+.tablecolor{
+    height:100%;
+    width:100%;
+    background-color: white;
 }
 table
 {
 	width:100%;
 }
-th
-{
-	height:50px;
+.tr{
+    overflow: hidden;
+    width: 100%;
+}
+.tr div{
+    float: left;
+    background-color: rgb(244, 246, 250);
+    font-size: large;
+    font-weight:bold;
+    text-align: center;
+    padding-top: 59px;
+    padding-bottom: 10px;
+}
+.tablemain{
+    overflow: hidden;
+    height: 100px;
+    background-color: white;
+    border-bottom: gray 1px solid;
+}
+.tablemain span{
+    display: block;
+    float: left;
+    padding-top:10px;
+    line-height: 80px;
+}
+.imggps{
+    position: relative;
+}
+.tablemain img{
+    display: block;
+    position:absolute;
+    top: 25px;
+    right: 57%;
+    width: 80px;
+    height: 50px;
+}
+.tablemain div{
+    float: left;
+    padding-top: 20px;
+    color:gray;
+    font-size: small;
+}
+.tablemain div section{
+    margin: 5px;
 }
 .foot{
     position:fixed;

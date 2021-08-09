@@ -1,37 +1,37 @@
-<!--全部申请/查看申请-->
+<!--查看申请-->
 <template>
-    <div class="main">
+    <div class="main" >
         <main>
             <section class="section2">
-                <el-breadcrumb separator-class="el-icon-arrow-right" class="el-breadcrumb-size">
-                    <el-breadcrumb-item :to="{ path: '/' }">全部申请</el-breadcrumb-item>
+                <el-breadcrumb separator-class="el-icon-arrow-right">
+                    <el-breadcrumb-item>发票管理</el-breadcrumb-item>
                     <el-breadcrumb-item>查看申请</el-breadcrumb-item>
                 </el-breadcrumb>
-                <div>
-                    <table>
-                        <tr>
-                            <th>订单编号</th>
-                            <th>订单金额</th>
-                            <th>下单时间</th>
-                            <th>付款时间</th>
-                            <th>完成时间</th>
-                            <th>开票备注</th>
-                            <th>操作</th>
-                        </tr>
-                        <tr v-for="i in shopslist" :key="i.id">
-                            <td>{{i.control_No}}</td>
-                            <td>{{i.price}}</td>
-                            <td>{{i.time1}}</td>
-                            <td>{{i.time2}}</td>
-                            <td>{{i.time3}}</td>
-                            <td>{{i.comment}}</td>
-                            <td>订单详情</td>
-                        </tr>
-                    </table>
+                <div :style="'height:'+fullHeight+'px;'">
+                    <div class="tablecolor">
+                        <div class="tr">
+                            <div style="width: 16%">订单编号</div>
+                            <div style="width: 14%">订单金额</div>
+                            <div style="width: 14%">下单时间</div>
+                            <div style="width: 14%">付款时间</div>
+                            <div style="width: 14%">完成时间</div>
+                            <div style="width: 14%">开票备注</div>
+                            <div style="width: 14%">操作</div>
+                        </div>
+                        <div v-for="i in shopslist" :key="i.id" class="tablemain">
+                            <span style="width: 16%">{{i.control_No}}</span>
+                            <span style="width: 14%">{{i.status}}</span>
+                            <span style="width: 14%">{{i.username}}</span>
+                            <span style="width: 14%">{{i.time}}</span>
+                            <span style="width: 14%">{{i.content}}</span>
+                            <span style="width: 14%">{{i.price}}</span>
+                            <div style="width: 14%"><section>订单详情</section></div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
-        <section class="section3"><el-button type="primary">添加商品</el-button></section>
+        
         <Foot class="foot"></Foot>
     </div>
 </template>
@@ -45,55 +45,127 @@ export default {
                 {
                     id:1,
                     control_No:181515156,
+                    status:"待付款",
+                    username:'njq',
+                    time:"2012-02-05",
+                    content:"卡通鼠标垫",
                     price:10,
-                    time1:"2012-02-05",
-                    time2:'2012-02-05',
-                    time3:"2012-02-05",
                     comment:"无",
                 },{
                     control_No:181515157,
+                    status:"已付款",
+                    username:'pzh',
+                    time:"2012-02-29",
+                    content:"纸尿布",
                     price:1000,
-                    time1:"2012-02-05",
-                    time2:'2012-02-05',
-                    time3:"2012-02-05",
                     comment:"无",
                 }
-            ]
+            ],
+            fullHeight: document.documentElement.clientHeight - 195
         }
     },
     components:{
         Foot
     },
-
+    watch: {
+			fullHeight (val) {//监控浏览器高度变化
+				if(!this.timer) {
+					this.fullHeight = val
+					this.timer = true
+					let that = this
+					setTimeout(function (){
+						that.timer = false
+					},400)
+				}
+				
+			}
+		},
+	mounted () {
+		this.get_bodyHeight()
+	},
+	methods :{
+		get_bodyHeight () {//动态获取浏览器高度
+			const that = this
+			window.onresize = () => {
+				return (() => {
+					window.fullHeight = document.documentElement.clientHeight
+					that.fullHeight = window.fullHeight - 195
+				})()
+			}
+		}
+	}
 }
 </script>
 
 <style scoped>
-main{
+.main{
     overflow: hidden;
+    position: relative;
+    background-color: rgb(244, 246, 250);
+    max-height: 1180px;
 }
 
-.el-breadcrumb-size{
+.el-breadcrumb{
+    background-color: white;
     font-size: 26px;
     line-height: 45px;
+    padding-left: 30px;
 }
 .section2{
-    width: 90%;
+    float: right;
+    width: 97%;
     text-align: center;
     overflow: hidden;
 }
 .section3{
+    margin: 3px;
     position: absolute;
     right: 100px;
-    top: 155px;
+    top: 0px;
+    
+}
+.tablecolor{
+    height:100%;
+    width:100%;
+    background-color: white;
 }
 table
 {
 	width:100%;
 }
-th
-{
-	height:50px;
+.tr{
+    overflow: hidden;
+    width: 100%;
+}
+.tr div{
+    float: left;
+    background-color: rgb(244, 246, 250);
+    font-size: large;
+    font-weight:bold;
+    text-align: center;
+    padding-top: 59px;
+    padding-bottom: 10px;
+}
+.tablemain{
+    overflow: hidden;
+    height: 100px;
+    background-color: white;
+    border-bottom: gray 1px solid;
+}
+.tablemain span{
+    display: block;
+    float: left;
+    padding-top:10px;
+    line-height: 80px;
+}
+.tablemain div{
+    float: left;
+    padding-top: 20px;
+    color:gray;
+    font-size: small;
+}
+.tablemain div section{
+    margin: 5px;
 }
 .foot{
     position:fixed;

@@ -4,7 +4,7 @@
         <main>
             <section class="section2">
                 <el-breadcrumb separator-class="el-icon-arrow-right">
-                    <el-breadcrumb-item >商品管理</el-breadcrumb-item>
+                    <el-breadcrumb-item>商品管理</el-breadcrumb-item>
                     <el-breadcrumb-item>待上架</el-breadcrumb-item>
                 </el-breadcrumb>
                 <section class="section3"><el-button type="primary">添加商品</el-button></section>
@@ -17,10 +17,10 @@
                                 <div style="width: 40%">操作</div>
                             </div>
                         <div v-for="i in shopslist" :key="i.id" class="tablemain">
-                            <span style="width: 40%">{{i.name}}</span>
+                            <span style="width: 40%" class="imggps"><img :src="i.imgurl">{{i.name}}</span>
                             <span style="width: 10%">{{i.price}}</span>
                             <span style="width: 10%">{{i.inventory}}</span>
-                            <span style="width: 40%">编辑商品<br/>上架<br/>修改</span>
+                            <div style="width: 40%"><section>编辑商品</section><section>上架</section><section>修改</section></div>
                         </div>
                     </div>
                 </div>
@@ -39,6 +39,7 @@ export default {
             shopslist:[
                 {
                     id:1,
+                    imgurl:"../static/img/Header.png",
                     name:'rog',
                     price:24000,
                     inventory:286,
@@ -49,7 +50,7 @@ export default {
                     inventory:287,
                 }
             ],
-            fullHeight: document.documentElement.clientHeight-195
+            fullHeight: document.documentElement.clientHeight - 195
         }
     },
     components:{
@@ -77,7 +78,7 @@ export default {
 			window.onresize = () => {
 				return (() => {
 					window.fullHeight = document.documentElement.clientHeight
-					that.fullHeight = window.fullHeight
+					that.fullHeight = window.fullHeight - 195
 				})()
 			}
 		}
@@ -86,10 +87,11 @@ export default {
 </script>
 
 <style scoped>
-main{
+.main{
     overflow: hidden;
     position: relative;
     background-color: rgb(244, 246, 250);
+    max-height: 1180px;
 }
 
 .el-breadcrumb{
@@ -105,10 +107,11 @@ main{
     overflow: hidden;
 }
 .section3{
-    margin: 5px;
+    margin: 3px;
     position: absolute;
     right: 100px;
     top: 0px;
+    
 }
 .tablecolor{
     height:100%;
@@ -126,11 +129,14 @@ table
 .tr div{
     float: left;
     background-color: rgb(244, 246, 250);
+    font-size: large;
+    font-weight:bold;
     text-align: center;
     padding-top: 59px;
     padding-bottom: 10px;
 }
 .tablemain{
+    overflow: hidden;
     height: 100px;
     background-color: white;
     border-bottom: gray 1px solid;
@@ -139,6 +145,27 @@ table
     display: block;
     float: left;
     padding-top:10px;
+    line-height: 80px;
+}
+.imggps{
+    position: relative;
+}
+.tablemain img{
+    display: block;
+    position:absolute;
+    top: 25px;
+    right: 57%;
+    width: 80px;
+    height: 50px;
+}
+.tablemain div{
+    float: left;
+    padding-top: 20px;
+    color:gray;
+    font-size: small;
+}
+.tablemain div section{
+    margin: 5px;
 }
 .foot{
     position:fixed;
