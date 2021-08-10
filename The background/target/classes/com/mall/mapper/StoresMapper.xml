@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.Mapper.StoresMapper">
+
+
+    <resultMap id="storesMap" type="Stores" autoMapping="true">
+        <id column="storesId" property="storesId"/>
+        <association property="category" javaType="Category" autoMapping="true">
+            <id column="categoryId" property="categoryId"/>
+        </association>
+    </resultMap>
+
+
+
+    <select id="findAll" resultMap="storesMap">
+        select
+               s.storesId,s.storesName,s.storesNotice,s.storesFlag,c.categoryId,c.categoryName,c.categoryLevel,c.categoryFlag,c.parentId,c.categoryRank
+        from stores s
+        join category c
+        on s.categoryId = c.categoryId
+    </select>
+
+    <select id="find" parameterType="int" resultMap="storesMap">
+        select s.storesId,s.storesName,s.storesNotice,s.storesFlag,c.categoryId,c.categoryName,c.categoryLevel,c.categoryFlag,c.parentId,c.categoryRank
+        from stores s
+        join category c
+        on s.categoryId = c.categoryId
+        where s.storesId = #{storesId}
+    </select>
+
+    <insert id="doAdd" parameterType="Stores">
+        insert into stores
+        (storesName,storesNotice,storesFlag,categoryId)
+        VALUES
+        (#{storesName},#{storesNotice},#{storesFlag},#{category.categoryId})
+    </insert>
+
+
+
+    <update id="doUpdate" parameterType="Stores">
+        update stores
+        set storesName=#{storesName},
+            storesNotice=#{storesNotice},
+            storesFlag=#{storesFlag},
+            categoryId=#{category.categoryId}
+        where storesId=#{storesId}
+    </update>
+</mapper>

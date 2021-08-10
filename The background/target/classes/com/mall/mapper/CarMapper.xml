@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.Mapper.CarMapper">
+
+
+    <resultMap id="carMap" type="Car" autoMapping="true">
+        <id column="carId" property="carId"/>
+        <association property="goods" javaType="Goods" autoMapping="true">
+            <id column="goodsId" property="goodsId"/>
+        </association>
+    </resultMap>
+
+
+
+    <select id="findAll" resultMap="carMap">
+        select
+               o.carId,o.carAddress,o.carFlag,g.goodsId,g.goodsName,g.goodsPrice,g.goodsXiangqing,g.goodsFlag,g.storesId
+        from car o
+        join goods g
+        on o.goodsId = g.goodsId
+    </select>
+
+    <select id="find" parameterType="int" resultMap="carMap">
+        select o.carId,o.carAddress,o.carFlag,g.goodsId,g.goodsName,g.goodsPrice,g.goodsXiangqing,g.goodsFlag,g.storesId
+        from car o
+        join goods g
+        on o.goodsId = g.goodsId
+        where o.carId=#{carId}
+    </select>
+
+    <insert id="doAdd" parameterType="Car">
+        insert into car
+        (carId,carAddress,carFlag,goodsId)
+        VALUES
+        (#{carId},#{carAddress},#{carFlag},#{goods.goodsId})
+    </insert>
+
+
+
+    <update id="doUpdate" parameterType="Car">
+        update car
+        set carId = #{carId},
+            carAddress=#{carAddress},
+            carFlag=#{carFlag},
+            goodsId=#{goods.goodsId}
+        where carId=#{carId}
+    </update>
+</mapper>

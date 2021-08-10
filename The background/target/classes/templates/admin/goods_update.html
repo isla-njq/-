@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <title>商品信息添加</title>
+    <link type="text/css" rel="stylesheet" href="/css/admin.css"/>
+    <style type ="text/css">
+        .frm
+        {
+            width:600px;
+            margin-top:30px;
+        }
+    </style>
+    <script type="text/javascript">
+        function showImg(){
+            var f = new FileReader();
+            f.onload=function ( ev ){
+                img.src=ev.target.result;
+            }
+            f.readAsDataURL(file.files[0]);
+        }
+    </script>
+</head>
+<body>
+<div class="frm">
+    <div class="title">
+        商品信息修改
+    </div>
+    <form action="/admin/goods/update_submit" method="post"  enctype="multipart/form-data">
+        <input type = "hidden" name="goodsId" th:value="${goods.goodsId}">
+        <table>
+            <tr>
+                <td>商品名称</td>
+                <td><input type="text" name="goodsName" required="required" th:value="${goods.goodsName}"/></td>
+            </tr>
+            <tr>
+                <td>商品类型</td>
+                <td><input type="text" name="goodsType" required="required" th:value="${goods.goodsType}"/></td>
+            </tr>
+            <tr>
+                <td>商品状态</td>
+                <td><input type="text" name="goodsStatus" required="required" th:value="${goods.goodsStatus}"/></td>
+            </tr>
+            <tr>
+                <td>商品价格</td>
+                <td><input type="text" name="goodsPrice" required="required" th:value="${goods.goodsPrice}"/></td>
+            </tr>
+            <tr>
+                <td>商品划线价</td>
+                <td><input type="text" name="goodsHuaxianjia" required="required" th:value="${goods.goodsHuaxianjia}"/></td>
+            </tr>
+            <tr>
+                <td>商品库存</td>
+                <td><input type="text" name="goodsStock" required="required" th:value="${goods.goodsStock}"/></td>
+            </tr>
+            <tr>
+                <td>商品规格</td>
+                <td><input type="text" name="goodsSpecifications" required="required" th:value="${goods.goodsSpecifications}"/></td>
+            </tr>
+            <tr>
+                <td>商品地址</td>
+                <td><input type="text" name="goodsAddress" required="required" th:value="${goods.goodsAddress}"/></td>
+            </tr>
+            <tr>
+                <td>商品生产日期</td>
+                <td><input type="date" name="goodsProduceDate" required="required" th:value="${#dates.format(goods.goodsProduceDate,'yyyy-MM-dd')}"/></td>
+            </tr>
+
+            <tr>
+                <td>商品照片</td>
+                <td>
+                    <img th:src="${goods.goodsPicture}" width="80" height="100" id="img" />
+                    <br/>
+                    <input type="file" name="file" id="file" onchange="showImg()"/>
+                    <input type="hidden" name="goodsPicture" th:value="${goods.goodsPicture}">
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>商品运费</td>
+                <td><input type="text" name="goodsYunfei" required="required" th:value="${goods.goodsYunfei}"/></td>
+            </tr>
+            <tr>
+                <td>商品详情</td>
+                <td><input type="text" name="goodsXiangqing" required="required" th:value="${goods.goodsXiangqing}"/></td>
+            </tr>
+            <tr>
+                <td>商品可视化</td>
+                <td><input type="text" name="goodsFlag" required="required" th:value="${goods.goodsFlag}"/></td>
+            </tr>
+            <tr>
+                <td>商品分类</td>
+                <td>
+                    <select name="category.categoryId">
+                        <option value="">请选择</option>
+                        <option th:each="c:${categoryList}"
+                                th:value="${c.categoryId}"
+                                th:text="${c.categoryName}"
+                                th:selected="${c.categoryId==goods.category.categoryId}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="修改"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.Mapper.GoodsMapper">
+
+
+    <resultMap id="goodsMap" type="Goods" autoMapping="true">
+        <id column="goodsId" property="goodsId"/>
+        <association property="category" javaType="Category" autoMapping="true">
+            <id column="categoryId" property="categoryId"/>
+        </association>
+    </resultMap>
+
+
+    <select id="findAll" resultMap="goodsMap">
+        select
+            g.goodsId,g.goodsName,g.goodsType,g.goodsStatus,g.goodsPrice,g.goodsHuaxianjia,g.goodsStock,g.goodsSpecifications,g.goodsAddress,g.goodsProduceDate,g.goodsPicture,g.goodsYunfei,g.goodsXiangqing,g.goodsFlag,g.storesId,c.categoryId,c.categoryName
+        from goods g
+        join category c
+        on g.categoryId = c.categoryId
+    </select>
+
+    <select id="find" parameterType="int" resultMap="goodsMap">
+        select
+            g.goodsId,g.goodsName,g.goodsType,g.goodsStatus,g.goodsPrice,g.goodsHuaxianjia,g.goodsStock,g.goodsSpecifications,g.goodsAddress,g.goodsProduceDate,g.goodsPicture,g.goodsYunfei,g.goodsXiangqing,g.goodsFlag,g.storesId,c.categoryId,c.categoryName
+        from goods g
+        join category c
+        on g.categoryId = c.categoryId
+        where g.goodsId=#{goodsId}
+    </select>
+
+    <insert id = "doAdd" parameterType="Goods">
+        insert into goods
+        (goodsName,goodsType,goodsStatus,goodsPrice,goodsHuaxianjia,goodsStock,goodsSpecifications,goodsAddress,goodsProduceDate,goodsPicture,goodsYunfei,goodsXiangqing,goodsFlag,storesId,categoryId)
+        VALUES
+        (#{goodsName},#{goodsType},#{goodsStatus},#{goodsPrice},#{goodsHuaxianjia},#{goodsStock},#{goodsSpecifications},#{goodsAddress},#{goodsProduceDate},#{goodsPicture},#{goodsYunfei},#{goodsXiangqing},#{goodsFlag},#{storesId},#{category.categoryId})
+    </insert>
+
+    <update id="doUpdate" parameterType="Goods">
+        update goods
+        set goodsName=#{goodsName},
+            goodsType=#{goodsType},
+            goodsStatus=#{goodsStatus},
+            goodsPrice=#{goodsPrice},
+            goodsHuaxianjia=#{goodsHuaxianjia},
+            goodsStock=#{goodsStock},
+            goodsSpecifications=#{goodsSpecifications},
+            goodsAddress=#{goodsAddress},
+            goodsProduceDate=#{goodsProduceDate},
+            goodsPicture=#{goodsPicture},
+            goodsYunfei=#{goodsYunfei},
+            goodsXiangqing=#{goodsXiangqing},
+            goodsFlag=#{goodsFlag},
+            storesId = #{storesId},
+            categoryId=#{category.categoryId}
+        where goodsId=#{goodsId}
+    </update>
+    <select id="findstoresgoods" parameterType="int" resultMap="goodsMap">
+        select
+            *
+        from goods
+        where storesId = #{storesId}
+    </select>
+</mapper>
