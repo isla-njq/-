@@ -24,6 +24,8 @@ import Storestatistics from '@/views/Shops/Data_Management/Store_statistics'
 import Accountmanagement from '@/views/Shops/Authority_management/Account_management'
 import MoneManagement from '@/views/Shops/Authority_management/Mone_Management'
 
+import Newcommodity from '@/views/Shops/Commodity_management/newcommodity'
+
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -38,61 +40,64 @@ export default new VueRouter({
         path:'/Main',
         component: Main,
         children:[{
-            path:"/Main/WaitPut",
-            component:WaitPut
+            path:"WaitPut",
+            component:WaitPut,
         },{
-            path:"/Main/Issue",
+            path:"Newcommodity",
+            component: Newcommodity
+        },{
+            path:"Issue",
             component:Issue
         },{
-            path:"/Main/Unshelve",
+            path:"Unshelve",
             component:Unshelve
         },{
-            path:"/Main/Sold",
+            path:"Sold",
             component:Sold
         },{
-            path:"/Main/Orderall",
+            path:"Orderall",
             component:Orderall
         },{
-            path:"/Main/Waitpay",
+            path:"Waitpay",
             component:Waitpay
         },{
-            path:"/Main/Waitship",
+            path:"Waitship",
             component:Waitship
         },{
-            path:"/Main/Waitrec",
+            path:"Waitrec",
             component:Waitrec
         },{
-            path:"/Main/Iscompleted",
+            path:"Iscompleted",
             component:Iscompleted
         },{
-            path:"/Main/Isclose",
+            path:"Isclose",
             component:Isclose
         },{
-            path:"/Main/Allapply",
+            path:"Allapply",
             component:Allapply
         },{
-            path:"/Main/Newinvoice",
+            path:"Newinvoice",
             component:Newinvoice
         },{
-            path:"/Main/Waitdispose",
+            path:"Waitdispose",
             component:Waitdispose
         },{
-            path:"/Main/Isdispose",
+            path:"Isdispose",
             component:Isdispose
         },{
-            path:"/Main/Commoditystatistics",
+            path:"Commoditystatistics",
             component:Commoditystatistics
         },{
-            path:"/Main/Classifiedstatistic",
+            path:"Classifiedstatistic",
             component:Classifiedstatistic
         },{
-            path:"/Main/Storestatistics",
+            path:"Storestatistics",
             component:Storestatistics
         },{
-            path:"/Main/Accountmanagement",
+            path:"Accountmanagement",
             component:Accountmanagement
         },{
-            path:"/Main/MoneManagement",
+            path:"MoneManagement",
             component:MoneManagement
         },{
             path: "/",

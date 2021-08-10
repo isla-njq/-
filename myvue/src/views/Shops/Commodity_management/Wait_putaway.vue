@@ -7,7 +7,7 @@
                     <el-breadcrumb-item>商品管理</el-breadcrumb-item>
                     <el-breadcrumb-item>待上架</el-breadcrumb-item>
                 </el-breadcrumb>
-                <section class="section3"><el-button type="primary">添加商品</el-button></section>
+                <section class="section3"><el-button type="primary" @click="newcom">添加商品</el-button></section>
                 <div :style="'height:'+fullHeight+'px;'">
                     <div class="tablecolor">
                         <div class="tr">
@@ -81,7 +81,12 @@ export default {
 					that.fullHeight = window.fullHeight - 195
 				})()
 			}
-		}
+		},
+        newcom(){
+            const that = this
+            alert("正在跳转"),
+            that.$router.push('/Main/Newcommodity')
+        }
 	}
 }
 </script>
