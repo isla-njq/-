@@ -1,20 +1,17 @@
-<!--添加商品-->
+<!--开票-->
 <template>
     <div class="main" >
         <main>
             <section class="section2">
                 <el-breadcrumb separator-class="el-icon-arrow-right">
-                    <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-                    <el-breadcrumb-item>已发布</el-breadcrumb-item>
-                    <el-breadcrumb-item>添加商品</el-breadcrumb-item>
+                    <el-breadcrumb-item>发票管理</el-breadcrumb-item>
+                    <el-breadcrumb-item>开票</el-breadcrumb-item>
                 </el-breadcrumb>
-                <section class="section3"><el-button type="primary">添加商品</el-button></section>
                 <div :style="'height:'+fullHeight+'px;'">
                     
                 </div>
             </section>
         </main>
-        
         <Foot class="foot"></Foot>
     </div>
 </template>
