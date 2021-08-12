@@ -24,6 +24,9 @@ export default {
 .main{
     overflow: hidden;
 }
+.header{
+    width: 100%;
+}
 
 .div1{
     position: absolute;
