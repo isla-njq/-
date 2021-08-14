@@ -33,6 +33,7 @@
 
 <script>
 import Foot from '../../../components/firm_background_foot.vue'
+import axios from 'axios'
 export default {
     data(){
         return{
@@ -70,8 +71,17 @@ export default {
 			}
 		},
 	mounted () {
-		this.get_bodyHeight()
-	},
+        this.get_bodyHeight()
+        let that = this;
+        axios('http://localhost:8080//admin/goods/findStatus?goodsStatus=待上架')
+        .then(function (response) {
+            that.shopslist=response.data.goodsStatusList;
+            console.log(that.shopslist);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
 	methods :{
 		get_bodyHeight () {//动态获取浏览器高度
 			const that = this

@@ -25,6 +25,7 @@ import Accountmanagement from '@/views/Shops/Authority_management/Account_manage
 import MoneManagement from '@/views/Shops/Authority_management/Mone_Management'
 
 import Newcommodity from '@/views/Shops/Commodity_management/newcommodity'
+import Issueredact from '@/views/Shops/Commodity_management/Issue_redact'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,9 @@ export default new VueRouter({
         },{
             path:"Issue",
             component:Issue
+        },{
+            path:"Issueredact",
+            component:Issueredact
         },{
             path:"Unshelve",
             component:Unshelve

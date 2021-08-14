@@ -1,4 +1,4 @@
-<!--已发布-->
+<!--修改已发布的商品信息-->
 <template>
     <div class="main" >
         <main>
@@ -6,23 +6,36 @@
                 <el-breadcrumb separator-class="el-icon-arrow-right">
                     <el-breadcrumb-item>商品管理</el-breadcrumb-item>
                     <el-breadcrumb-item>已发布</el-breadcrumb-item>
+                    <el-breadcrumb-item>编辑商品</el-breadcrumb-item>
                 </el-breadcrumb>
-                <section class="section3"><el-button type="primary">添加商品</el-button></section>
-                <div :style="'height:'+fullHeight+'px;'">
-                    <div class="tablecolor">
-                        <div class="tr">
-                                <div style="width: 40%">商品名称</div>
-                                <div style="width: 10%">价格</div>
-                                <div style="width: 10%">库存</div>
-                                <div style="width: 10%">销量</div>
-                                <div style="width: 30%">操作</div>
-                            </div>
-                        <div v-for="i in shopslist" :key="i.id" class="tablemain">
-                            <span style="width: 40%" class="imggps"><img :src="i.imgurl">{{i.name}}</span>
-                            <span style="width: 10%">{{i.price}}</span>
-                            <span style="width: 10%">{{i.inventory}}</span>
-                            <span style="width: 10%">{{i.inventory}}</span>
-                            <div style="width: 30%"><section @click="redact">编辑商品</section><section>下架</section></div>
+                <section class="section3"><el-button type="primary">确定</el-button></section>
+                <div :style="'height:'+fullHeight+'px;'" class="classmain">
+                    <div class="classdiv">
+                        <div class="name">商品名称<el-input v-model="name"></el-input></div>
+                        <div class="abouts">
+                            <span>商品简介</span> 
+                            <el-input
+                              type="textarea"
+                              :rows="3"
+                              placeholder="请输入内容"
+                              v-model="abouts"
+                              resize="none"
+                              class="abouts-input"
+                              >
+                            </el-input>
+                        </div>
+                        <div class="price">库存<el-input v-model="price"></el-input></div>
+                        <div class="describe">
+                            <span>商品描述</span> 
+                            <el-input
+                              type="textarea"
+                              :rows="3"
+                              placeholder="请输入内容"
+                              v-model="describe"
+                              resize="none"
+                              class="abouts-input"
+                              >
+                            </el-input>
                         </div>
                     </div>
                 </div>
@@ -38,6 +51,10 @@ import Foot from '../../../components/firm_background_foot.vue'
 export default {
     data(){
         return{
+            name:"",
+            abouts:"",
+            price:"",
+            describe:"",
             shopslist:[
                 {
                     id:1,
@@ -83,12 +100,7 @@ export default {
 					that.fullHeight = window.fullHeight - 195
 				})()
 			}
-		},
-        redact(){
-            const that = this
-            alert("正在跳转"),
-            that.$router.push('/Main/Issueredact')
-        }
+		}
 	}
 }
 </script>
@@ -120,60 +132,52 @@ export default {
     top: 0px;
     
 }
-.tablecolor{
-    height:100%;
-    width:100%;
+.classmain{
+    margin-top: 50px;
     background-color: white;
 }
-table
+.classdiv{
+    width: 700px;
+    margin: auto;
+}
+.classdiv div
 {
-	width:100%;
+    text-align: left;
 }
-.tr{
-    overflow: hidden;
-    width: 100%;
+
+.el-input{
+    margin: 20px;
+    width: 40%;
 }
-.tr div{
-    float: left;
-    background-color: rgb(244, 246, 250);
-    font-size: large;
-    font-weight:bold;
-    text-align: center;
-    padding-top: 59px;
-    padding-bottom: 10px;
-}
-.tablemain{
-    overflow: hidden;
-    height: 100px;
-    background-color: white;
-    border-bottom: gray 1px solid;
-}
-.tablemain span{
-    display: block;
-    float: left;
-    padding-top:10px;
-    line-height: 80px;
-}
-.imggps{
+
+.abouts{
     position: relative;
+    height: 100px;
+    overflow: hidden;
 }
-.tablemain img{
-    display: block;
-    position:absolute;
-    top: 25px;
-    right: 57%;
-    width: 80px;
-    height: 50px;
+.describe{
+    position: relative;
+    height: 100px;
+    overflow: hidden;
 }
-.tablemain div{
-    float: left;
-    padding-top: 20px;
-    color:gray;
-    font-size: small;
+
+.abouts-input{
+    position: absolute;
+    top:0px;
+    left: 65px;
+    margin-left: 20px;
+    width: 80%;
 }
-.tablemain div section{
-    margin: 5px;
+.abouts span{
+    position: absolute;
+    top:0px;
+    left: 0px;
 }
+.price .el-input{
+    margin-left: 55px;
+    width: 20%;
+}
+
 .foot{
     position:fixed;
     bottom:10px; 

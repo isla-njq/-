@@ -27,6 +27,7 @@
                           :rows="3"
                           placeholder="请输入内容"
                           v-model="textarea"
+                          resize="none"
                           class="abouts-input"
                           >
                         </el-input>
@@ -79,6 +80,7 @@
                           :rows="3"
                           placeholder="请输入内容"
                           v-model="textarea"
+                          resize="none"
                           class="abouts-input"
                           >
                         </el-input>
@@ -182,18 +184,18 @@ export default {
         Foot
     },
     watch: {
-			fullHeight (val) {//监控浏览器高度变化
-				if(!this.timer) {
-					this.fullHeight = val
-					this.timer = true
-					let that = this
-					setTimeout(function (){
-						that.timer = false
-					},400)
-				}
-				
+		fullHeight (val) {//监控浏览器高度变化
+			if(!this.timer) {
+				this.fullHeight = val
+				this.timer = true
+				let that = this
+				setTimeout(function (){
+					that.timer = false
+				},400)
 			}
-		},
+			
+		}
+	},
 	mounted () {
 		this.get_bodyHeight()
 	},
@@ -276,6 +278,11 @@ export default {
     top: 20px;
     left: 0px;
 }
+.describe{
+    position: relative;
+    height: 100px;
+    overflow: hidden;
+}
 .abouts-input{
     position: absolute;
     top:0px;
@@ -298,9 +305,5 @@ export default {
     width: 10%;
 }
 
-.describe{
-    position: relative;
-    height: 100px;
-    overflow: hidden;
-}
+
 </style>

@@ -1,7 +1,7 @@
 <template>
     <header>
-        <div @click="Logout">注销</div>
-        <div>管理员用户名：{{$store.state.user}}</div>
+        <div style="margin-right: 10%" @click="Logout">注销</div>
+        <div style="margin-right: 5%">管理员用户名：{{$store.state.user}}</div>
     </header>
 </template>
 
@@ -24,18 +24,16 @@ export default {
 <style scoped>
 header div{
     float: right;
-    margin-right: 50px;
 }
 header{
     background-image: url(../../static/img/Header.png);
-    background-size:1920px 150px;
+    background-size:100% 100%;
     background-repeat:no-repeat;
-    padding: 30px;
     height: 90px;
 }
 div{
-    font-size: 20px;
-    padding-top:25px ;
+    font-size: 1rem;
+    padding-top: 30px;
     color: white;
 }
 </style>

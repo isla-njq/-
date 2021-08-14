@@ -26,24 +26,28 @@ export default {
 }
 .header{
     width: 100%;
+    z-index: 1001;
 }
 
 .div1{
     position: absolute;
     left: 0px;
-    top: 150px;
-    right: -17px;
+    top: 90px;
     bottom: 0px;
-    overflow-y:auto;
+    width: 200px;
     overflow-x: hidden;
+    overflow-y: scroll;
     background-color: #304156;
-    width: 219px;
+    box-sizing: content-box;
     padding-right: 20px;
 }
 .div2{
-    margin-left: 213px;
+    position: absolute;
+    left: 180px;
+    right: 0px;
+    top:90px;
+    bottom: 0px;
+    background-color: rgb(244, 246, 250);
     z-index: 1001;
-    max-height: 1030px;
-    overflow: hidden;
 }
 </style>
