@@ -1,53 +1,40 @@
 <template>
-  <div class="main">
-    <div class="main_body">
-      <div><h1>账户登录</h1></div>
-      <div class="login_main">
-        <form class="choose">
-          <div>用户名：<input type="text" name="username" ref="userid" /></div>
-          <br />
-          <div>
-            密　码：<input
-              type="password"
-              name="userpassword"
-              ref="userpassword"
-            />
+  <div class="all">
+    <section class="photo">
+      <img src="../../../myvue/static/img/图片.png" alt="">
+    </section>
+    <div class="main"> 
+      <header><h1>账户登录</h1></header>
+      <div class="main_body">
+        <div class="login_main">
+            <div class="id">用户名：<el-input v-model="userid" placeholder="请输入内容"></el-input></div>
+            <br />
+            <div class="password">
+              密　码：<el-input placeholder="请输入密码" v-model="userpassword" show-password></el-input>
+            </div>
+          </div>  
+          <div class="choose_main">
+            <el-radio v-model="looplist" label="Administrator">管理员</el-radio>
+            <el-radio v-model="looplist" label="merchant">商家</el-radio>
           </div>
-        </form>
-        <form>
-          <div id="adm">
-            <input
-              type="radio"
-              name="usertype"
-              value="Administrator"
-              v-model="looplist"
-            />管理员
+          <div class="button_main">
+            <el-button type="primary" @click="userlogin">登入</el-button>
           </div>
-          <div id="mer">
-            <input
-              type="radio"
-              name="usertype"
-              value="merchant"
-              v-model="looplist"
-            />商家
-          </div>
-        </form>
-        <button @click="userlogin">登录</button>
       </div>
     </div>
-  </div>
+  </div> 
 </template>
 
 <script>
 import axios from 'axios'
-import router from 'vue-router'
-
 import Qs from 'qs'
 
 export default {
   data() {
     return {
       looplist: '',
+      userid:'',
+      userpassword:'',
     }
   },
   methods: {
@@ -57,17 +44,17 @@ export default {
         alert('请选择你的身份')
         return
       }
-      if (_this.$refs.userid.value.length == 0) {
+      if (_this.userid.length == 0) {
         alert('请输入账号')
       } else if (
-        _this.$refs.userpassword.value.length == 0 ||
-        _this.$refs.userid.value.length == 0
+        _this.userpassword.length == 0 ||
+        _this.userid.length == 0
       ) {
         alert('账号或密码错误')
       } else {
         let data = {
-          username: _this.$refs.userid.value,
-          password: _this.$refs.userpassword.value,
+          username: _this.userid,
+          password: _this.userpassword,
         }
         axios({
           headers: {
@@ -80,7 +67,7 @@ export default {
           if (response.data.status == false) {
             alert(response.data.message)
           } else {
-            _this.$store.commit('login',{username:_this.$refs.userid.value,userpassword:_this.$refs.userpassword.value}),
+            _this.$store.commit('login',{username:_this.userid,userpassword:_this.userpassword}),
             alert(_this.$store.state.user),
             _this.$router.push({
               path: '/Personal_center',
@@ -95,12 +82,32 @@ export default {
 </script>
 
 <style scoped>
+.all{
+  position: fixed;
+  top:0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-image: url('../../../myvue/static/img/背景.png');
+}
+.photo img{
+  position: fixed;
+  position: fixed;
+  top: 15%;
+  right: 8%;
+}
 div {
   background-color: rgb(217, 232, 251);
 }
+header{
+  text-align: center;
+  padding: 30px 10px 0px 10px;
+}
 .main {
+  border-style:groove;
+  border:5px rgb(76, 118, 170) solid;
   position: fixed;
-  top: 20%;
+  top: 22.5%;
   right: 20%;
   width: 500px;
   height: 400px;
@@ -111,44 +118,25 @@ div {
   overflow: hidden;
 }
 .login_main {
-  width: 42%;
   padding: 30px;
   color: rgb(30, 100, 152);
 }
-.login_main input {
-  border-radius: 0.2rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(171, 171, 171);
+.el-input{
+  width: 80%;;
 }
-.login_main form {
-  width: 250px;
+.choose_main{
+  width: 90%;
+  padding: 0px 40px 0px 40px;
+  display: flex;
 }
-.choose div input {
-  width: 70%;
+.choose_main .el-radio{
+  flex: 1;
 }
-.choose div {
-  margin-bottom: 15px;
+.button_main{
+  margin: 30px;
+  text-align: center;
 }
-form {
-  overflow: hidden;
-}
-#adm {
-  width: 48%;
-  float: left;
-  border-right: solid black 1px;
-}
-#mer {
-  width: 48%;
-  float: right;
-}
-button {
-  margin: 10%;
-  width: 100%;
-  height: 30px;
-  background-color: rgb(0, 108, 175);
-  color: white;
-  border-radius: 0.3rem;
-  border-width: 0px;
+.el-button{
+  width: 50%;
 }
 </style>
