@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+//店铺侧
 import Login from '@/views/Login'
 import Personal_center from '@/views/Personal_center'
 import Main from '@/views/Shops/Main'
@@ -26,6 +27,10 @@ import MoneManagement from '@/views/Shops/Authority_management/Mone_Management'
 
 import Newcommodity from '@/views/Shops/Commodity_management/newcommodity'
 import Issueredact from '@/views/Shops/Commodity_management/Issue_redact'
+
+//管理员侧
+import Admain from '@/views/Administrator/Main'
+import Newenterprise from '@/views/Administrator/Customer_management/Enterprise_Information_Management/new_enterprise'
 
 Vue.use(VueRouter)
 
@@ -107,7 +112,14 @@ export default new VueRouter({
             path: "/",
             redirect: '/Main/WaitPut'
         }]
-    },{
+    }, {
+        path: '/Admain',
+        component: Admain,
+        children:[{
+            path:"Newenterprise",
+            component:Newenterprise,
+        },]
+    }, {
         path: "*",
         redirect: '/'
     }

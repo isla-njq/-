@@ -8,6 +8,7 @@
                     <el-breadcrumb-item>待上架</el-breadcrumb-item>
                 </el-breadcrumb>
                 <section class="section3"><el-button type="primary" @click="newcom">添加商品</el-button></section>
+                <div><el-input v-model="input" @input="queryData" placeholder="请输入内容"></el-input></div>
                 <div :style="'height:'+fullHeight+'px;'">
                     <div class="tablecolor">
                         <div class="tr">
@@ -16,7 +17,7 @@
                                 <div style="width: 10%">库存</div>
                                 <div style="width: 40%">操作</div>
                             </div>
-                        <div v-for="i in shopslist" :key="i.id" class="tablemain">
+                        <div v-for="i in shops" :key="i.id" class="tablemain">
                             <span style="width: 40%" class="imggps"><img :src="i.imgurl">{{i.name}}</span>
                             <span style="width: 10%">{{i.price}}</span>
                             <span style="width: 10%">{{i.inventory}}</span>
@@ -37,6 +38,8 @@ import axios from 'axios'
 export default {
     data(){
         return{
+            input:"",
+            shops:[],
             shopslist:[
                 {
                     id:1,
@@ -46,7 +49,7 @@ export default {
                     inventory:286,
                 },{
                     id:2,
-                    name:'rog',
+                    name:'abc',
                     price:24800,
                     inventory:287,
                 }
@@ -81,6 +84,7 @@ export default {
         .catch(function (error) {
             console.log(error);
         });
+        that.shops=that.shopslist
     },
 	methods :{
 		get_bodyHeight () {//动态获取浏览器高度
@@ -96,8 +100,18 @@ export default {
             const that = this
             alert("正在跳转"),
             that.$router.push('/Main/Newcommodity')
-        }
-	}
+        },
+        queryData(){
+            //并没有输入关键字时，就不要再搜索了
+            if(this.input===''||this.input==null){
+                this.shops=this.shopslist;
+                return;
+            }
+            //搜索
+            let list=this.shopslist.filter(item=>item.name.indexOf(this.input)>=0);
+            this.shops=list;
+	    }
+    }
 }
 </script>
 
