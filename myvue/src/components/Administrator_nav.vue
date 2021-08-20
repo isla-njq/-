@@ -2,7 +2,7 @@
   <div class="main">
       <div class="navmain">
         <el-menu
-        default-active=""
+        default-active="/Admain"
         background-color="#304156"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -13,11 +13,12 @@
             <span slot="title" >客户管理</span>
             <el-submenu index="1-1">
               <span slot="title">企业信息管理</span>
+              <el-menu-item index="/Admain/All_enterprise_information">全部企业信息</el-menu-item>
               <el-menu-item index="/Admain/Newenterprise">新增企业</el-menu-item>
-              <el-menu-item index="">查看具体企业信息</el-menu-item>
-              <el-menu-item index="">修改企业信息</el-menu-item>
+              <el-menu-item index="/Admain/Enterprise_specific_information">查看具体企业信息</el-menu-item>
+              <el-menu-item index="/Admain/Modifying_Enterprise_Information">修改企业信息</el-menu-item>
             </el-submenu>
-            <el-menu-item class="list" index="t">会员信息管理</el-menu-item>
+            <el-menu-item class="list" index="/Admain/Member_Information_Management">会员信息管理</el-menu-item>
           </el-submenu>
 
           <el-submenu index="2">
@@ -34,7 +35,7 @@
             <span slot="title">系统管理</span>
             <el-submenu index="3-1">
               <span slot="title">角色管理</span>
-                <el-menu-item index="">新增角色</el-menu-item>
+                <el-menu-item index="/Admain/new_role">新增角色</el-menu-item>
                 <el-menu-item index="">角色修改</el-menu-item>
             </el-submenu>
             <el-submenu index="3-2">

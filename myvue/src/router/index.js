@@ -30,7 +30,17 @@ import Issueredact from '@/views/Shops/Commodity_management/Issue_redact'
 
 //管理员侧
 import Admain from '@/views/Administrator/Main'
+//客户管理
+import All_enterprise_information from '@/views/Administrator/Customer_management/Enterprise_Information_Management/All_enterprise_information'
 import Newenterprise from '@/views/Administrator/Customer_management/Enterprise_Information_Management/new_enterprise'
+import Enterprise_specific_information from '@/views/Administrator/Customer_management/Enterprise_Information_Management/Enterprise_specific_information'
+import Modifying_Enterprise_Information from '@/views/Administrator/Customer_management/Enterprise_Information_Management/Modifying_Enterprise_Information'
+import Member_Information_Management from '@/views/Administrator/Customer_management/Enterprise_Information_Management/Member_Information_Management'
+
+//系统管理
+//角色管理
+import new_role from '@/views/Administrator/System_management/Role_management/new_role'
+
 
 Vue.use(VueRouter)
 
@@ -118,6 +128,21 @@ export default new VueRouter({
         children:[{
             path:"Newenterprise",
             component:Newenterprise,
+        },{
+            path:"All_enterprise_information",
+            component:All_enterprise_information,
+        },{
+            path:"Enterprise_specific_information",
+            component:Enterprise_specific_information,
+        },{
+            path:"Modifying_Enterprise_Information",
+            component:Modifying_Enterprise_Information,
+        },{
+            path:"Member_Information_Management",
+            component:Member_Information_Management,
+        },{
+            path:"new_role",
+            component:new_role,
         },]
     }, {
         path: "*",
